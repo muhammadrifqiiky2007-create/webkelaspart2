@@ -1,0 +1,259 @@
+/* Reset Dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 0;
+}
+
+header {
+    /* Menggunakan posisi relatif agar overlay di dalamnya rapi */
+    position: relative;
+    
+    /* BACKGROUND IMAGE SETTINGS */
+    background-image: url("WhatsApp\ Image\ 2025-11-30\ at\ 20.32.39.jpg"); 
+    background-position: center; /* Foto selalu di tengah */
+    background-repeat: no-repeat;
+    
+    /* INI KUNCINYA AGAR PAS DI SEMUA SOFTWARE/LAYAR */
+    background-size: cover; /* Gambar dipaksa menutupi seluruh area tanpa gepeng */
+    
+    /* Tinggi menyesuaikan: 60% dari tinggi layar pengguna (HP/Laptop) */
+    height: 60vh; 
+    width: 100%;
+    
+    /* Flexbox agar teks di tengah */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Responsif: Jika di HP, tinggi header mungkin perlu lebih pendek agar proporsional */
+@media (max-width: 768px) {
+    header {
+        height: 50vh; /* Lebih pendek sedikit di HP */
+    }
+}
+
+header h1 {
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase; /* Membuat semua huruf menjadi kapital */
+    letter-spacing: 5px;      /* Memberikan jarak antar huruf agar terlihat mewah */
+    font-weight: 800;
+    color: #9900ff;
+}
+
+/* Section About */
+#about { text-align: center; background: white; }
+#about h2 { color: #2c3e50; margin-bottom: 20px; }
+
+/* Grid Gallery */
+/* Container Utama Galeri */
+.grid {
+    display: grid;
+    /* Secara default untuk HP: 2 kolom */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 15px;
+    padding: 10px;
+}
+
+/* Tablet: 3 atau 4 kolom */
+@media (min-width: 600px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+}
+
+/* Laptop/Desktop: 5 atau 6 kolom */
+@media (min-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 25px;
+    }
+}
+
+/* Container kartu siswa */
+/* Perbaikan Card agar pas di layar kecil */
+.card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Pastikan semua kartu tingginya sama */
+}
+
+.foto-wrapper {
+    width: 100%;
+    aspect-ratio: 3 / 4; /* Rasio pas foto tetap terjaga */
+    overflow: hidden;
+    position: relative;
+}
+
+/* Label Jabatan di Dalam Foto */
+.badge-jabatan {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.7); /* Hitam transparan */
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    backdrop-filter: blur(4px); /* Efek blur estetik */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Info Nama */
+.card-info {
+    padding: 15px 10px;
+    text-align: center;
+}
+
+.card-info h3 {
+    font-size: 1rem;
+    margin: 0;
+    color: #333;
+}
+
+.angkatan {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 4px;
+}
+
+/* Efek Hover */
+.card:hover .badge-jabatan {
+    background: #4A90E2; /* Berubah warna saat kartu disentuh */
+    transition: 0.3s;
+}
+
+/* Pengaturan utama agar gambar tidak gepeng */
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Foto tidak gepeng di layar apapun */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card:hover img {
+    transform: scale(1.05); /* Efek zoom halus */
+}
+
+/* Area Teks */
+.card h3 {
+    font-size: 0.9rem; /* Ukuran font lebih fleksibel */
+    padding: 10px 5px;
+    text-align: center;
+}
+
+.caption {
+    font-size: 0.75rem;
+    color: #7f8c8d;
+    text-align: center;
+    padding-bottom: 12px;
+}
+
+/* Style untuk Modal (Latar Belakang) */
+.modal {
+    display: none; /* Sembunyi secara default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Hitam transparan */
+    backdrop-filter: blur(5px);
+}
+
+/* Konten di dalam Modal */
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Tombol Tutup (X) */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+}
+
+/* Foto di dalam Modal */
+.modal-img {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.modal-info h2 { margin: 10px 0; color: #2c3e50; }
+.modal-info p { color: #3498db; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+
+/* Penyesuaian Modal untuk HP */
+@media (max-width: 480px) {
+    .modal-content {
+        width: 95%;
+        margin: 20% auto;
+        padding: 15px;
+    }
+    
+    header h1 {
+        font-size: 1.8rem; /* Judul mengecil di HP */
+    }
+}
+
+.overlay {
+    /* Overlay menyesuaikan ukuran konten di dalamnya */ 
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    width: 85%; /* Agar tidak menempel ke pinggir di HP */
+    max-width: 800px;
+}
+
+/* Footer */
+footer {
+    background: #3c0081;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+}
